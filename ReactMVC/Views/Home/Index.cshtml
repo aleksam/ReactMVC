@@ -31,13 +31,18 @@
     </div>
 </div>
 
+@for (int i = 1; i < 4; i++) {
+
 @Html.React("CommentBox", new
 {
   initialData = Model,
   url = Url.Action("Comments"),
   submitUrl = Url.Action("AddComment"),
   pollInterval = 2000,
+  articleId = i.ToString(),
 })
+
+}
 
 @*<div id="content">Loading ...</div>*@
 

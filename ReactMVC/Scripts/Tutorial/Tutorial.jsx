@@ -3,7 +3,7 @@
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: this.props.initialData
         };
     }
 
@@ -42,7 +42,7 @@
     render() {
         return (
             <div className="commentBox">
-                <h1>Comments</h1>
+                <h1>Comments for article {this.props.articleId}</h1>
                 <CommentList data={this.state.data} />
                 <CommentForm onCommentSubmit={this.handleCommentSubmit} />
             </div>
@@ -128,18 +128,21 @@ class CommentForm extends React.Component {
 };
 
 class Comment extends React.Component {
-    rawMarkup() {
-        var md = new Remarkable();
-        var rawMarkup = md.render(this.props.children.toString());
-        return { __html: rawMarkup };
-    }
+
+    // breaking server side rendering no need with R16
+    //rawMarkup() {
+    //    var md = new (global.Remarkable || window.Remarkable)();  
+    //    var rawMarkup = md.render(this.props.children.toString());
+    //    return { __html: rawMarkup };
+    //}
+
     render() {
         return (
             <div className="comment">
                 <h2 className="commentAuthor">
                     {this.props.author}
                 </h2>
-                <span dangerouslySetInnerHTML={this.rawMarkup()} />
+                <span> {this.props.children.toString()} </span>
             </div>
         );
     }

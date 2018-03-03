@@ -38,7 +38,7 @@ namespace ReactMVC.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(_comments);
         }
 
         public ActionResult About()
