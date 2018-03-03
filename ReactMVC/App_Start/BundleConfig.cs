@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Optimization;
+using System.Web.Optimization.React;
 
 namespace ReactMVC
 {
@@ -26,6 +27,16 @@ namespace ReactMVC
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new BabelBundle("~/bundles/main").Include(
+                "~/Scripts/Tutorial/Tutorial.jsx",
+                "~/Scripts/remarkable.min.js"
+            ));
+
+            // Forces files to be combined and minified in debug mode
+            // Only used here to demonstrate how combination/minification works
+            // Normally you would use unminified versions in debug mode.
+            // BundleTable.EnableOptimizations = true;
         }
     }
 }
