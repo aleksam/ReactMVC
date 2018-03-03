@@ -145,7 +145,8 @@ class Comment extends React.Component {
     }
 };
 
-ReactDOM.render(
-    <CommentBox url="/comments" submitUrl="/comments/new" pollInterval={2000} />,
-    document.getElementById('content')
-);
+// do not need with server side rendering
+//ReactDOM.render(
+//    <CommentBox url="/comments" submitUrl="/comments/new" pollInterval={2000} />,
+//    document.getElementById('content')
+//);

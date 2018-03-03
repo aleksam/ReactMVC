@@ -24,6 +24,9 @@ namespace ReactMVC
             //	.SetLoadBabel(false)
             //	.AddScriptWithoutTransform("~/Scripts/bundle.server.js")
 
+            ReactSiteConfiguration.Configuration
+                .AddScript("~/Scripts/Tutorial/Tutorial.jsx");
+
         }
-	}
+    }
 }

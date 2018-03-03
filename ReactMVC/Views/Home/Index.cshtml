@@ -31,5 +31,13 @@
     </div>
 </div>
 
-<div id="content">Loading ...</div>
+@Html.React("CommentBox", new
+{
+  initialData = Model,
+  url = Url.Action("Comments"),
+  submitUrl = Url.Action("AddComment"),
+  pollInterval = 2000,
+})
+
+@*<div id="content">Loading ...</div>*@
 
