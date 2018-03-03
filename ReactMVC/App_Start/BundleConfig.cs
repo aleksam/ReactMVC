@@ -29,8 +29,7 @@ namespace ReactMVC
                       "~/Content/site.css"));
 
             bundles.Add(new BabelBundle("~/bundles/main").Include(
-                "~/Scripts/Tutorial/Tutorial.jsx",
-                "~/Scripts/remarkable.min.js"
+                "~/Scripts/Tutorial/Tutorial.jsx"
             ));
 
             // Forces files to be combined and minified in debug mode

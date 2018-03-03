@@ -1,5 +1,13 @@
-﻿var CommentBox = React.createClass({
-    loadCommentsFromServer: function () {
+﻿class CommentBox extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        };
+    }
+
+    loadCommentsFromServer = () => {
         var xhr = new XMLHttpRequest();
         xhr.open('get', this.props.url, true);
         xhr.onload = function () {
@@ -7,8 +15,9 @@
             this.setState({ data: data });
         }.bind(this);
         xhr.send();
-    },
-    handleCommentSubmit: function (comment) {
+    }
+
+    handleCommentSubmit = (comment) => {
         var data = new FormData();
         data.append('Author', comment.Author);
         data.append('Text', comment.Text);
@@ -19,15 +28,18 @@
             this.loadCommentsFromServer();
         }.bind(this);
         xhr.send(data);
-    },
-    getInitialState: function () {
-        return { data: [] };
-    },
-    componentDidMount: function () {
+    }
+
+    // R16 use constructor this.state in constuctor
+    //getInitialState() {
+    //    return { data: [] };
+    //}
+
+    componentDidMount() {
         this.loadCommentsFromServer();
         window.setInterval(this.loadCommentsFromServer, this.props.pollInterval);
-    },
-    render: function () {
+    }
+    render() {
         return (
             <div className="commentBox">
                 <h1>Comments</h1>
@@ -36,10 +48,10 @@
             </div>
         );
     }
-});
+};
 
-var CommentList = React.createClass({
-    render: function () {
+class CommentList extends React.Component {
+    render() {
         var commentNodes = this.props.data.map(function (comment) {
             return (
                 <Comment author={comment.Author} key={comment.Id}>
@@ -53,19 +65,30 @@ var CommentList = React.createClass({
             </div>
         );
     }
-});
+};
 
-var CommentForm = React.createClass({
-    getInitialState: function () {
-        return { author: '', text: '' };
-    },
-    handleAuthorChange: function (e) {
+class CommentForm extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            author: '',
+            text: ''
+        };
+    }
+
+    // R16 use constructor this.state in constuctor
+    //getInitialState() {
+    //    return { author: '', text: '' };
+    //}
+
+    handleAuthorChange = (e) => {
         this.setState({ author: e.target.value });
-    },
-    handleTextChange: function (e) {
+    }
+    handleTextChange = (e) => {
         this.setState({ text: e.target.value });
-    },
-    handleSubmit: function (e) {
+    }
+    handleSubmit = (e) => {
         e.preventDefault();
         var author = this.state.author.trim();
         var text = this.state.text.trim();
@@ -74,8 +97,8 @@ var CommentForm = React.createClass({
         }
         this.props.onCommentSubmit({ Author: author, Text: text });
         this.setState({ author: '', text: '' });
-    },
-    render: function () {
+    }
+    render() {
         return (
             <form className="commentForm form-inline" onSubmit={this.handleSubmit}>
                 <div className="form-group">
@@ -102,16 +125,15 @@ var CommentForm = React.createClass({
             </form>
         );
     }
-});
+};
 
-var Comment = React.createClass({
-    rawMarkup: function () {
+class Comment extends React.Component {
+    rawMarkup() {
         var md = new Remarkable();
         var rawMarkup = md.render(this.props.children.toString());
         return { __html: rawMarkup };
-    },
-
-    render: function () {
+    }
+    render() {
         return (
             <div className="comment">
                 <h2 className="commentAuthor">
@@ -121,13 +143,7 @@ var Comment = React.createClass({
             </div>
         );
     }
-});
-
-var data = [
-    { Id: 1, Author: "Daniel Lo Nigro", Text: "Hello ReactJS.NET World!" },
-    { Id: 2, Author: "Pete Hunt", Text: "This is one comment" },
-    { Id: 3, Author: "Jordan Walke", Text: "This is *another* comment" }
-];
+};
 
 ReactDOM.render(
     <CommentBox url="/comments" submitUrl="/comments/new" pollInterval={2000} />,
