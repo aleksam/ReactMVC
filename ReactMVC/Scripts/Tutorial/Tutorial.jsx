@@ -39,6 +39,7 @@
         this.loadCommentsFromServer();
         window.setInterval(this.loadCommentsFromServer, this.props.pollInterval);
     }
+
     render() {
         return (
             <div className="commentBox">
@@ -85,9 +86,11 @@ class CommentForm extends React.Component {
     handleAuthorChange = (e) => {
         this.setState({ author: e.target.value });
     }
+
     handleTextChange = (e) => {
         this.setState({ text: e.target.value });
     }
+
     handleSubmit = (e) => {
         e.preventDefault();
         var author = this.state.author.trim();
@@ -98,6 +101,7 @@ class CommentForm extends React.Component {
         this.props.onCommentSubmit({ Author: author, Text: text });
         this.setState({ author: '', text: '' });
     }
+
     render() {
         return (
             <form className="commentForm form-inline" onSubmit={this.handleSubmit}>
