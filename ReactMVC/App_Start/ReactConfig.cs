@@ -25,8 +25,8 @@ namespace ReactMVC
             //	.AddScriptWithoutTransform("~/Scripts/bundle.server.js")
 
             ReactSiteConfiguration.Configuration
-                //.AddScript("~/Scripts/remarkable.min.js")
-                .AddScript("~/Scripts/Tutorial/Tutorial.jsx");
+                .SetLoadBabel(false)
+                .AddScriptWithoutTransform("~/build/server.bundle.js");
 
         }
     }

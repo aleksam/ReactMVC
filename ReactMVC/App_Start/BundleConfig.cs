@@ -28,8 +28,12 @@ namespace ReactMVC
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new BabelBundle("~/bundles/main").Include(
-                "~/Scripts/Tutorial/Tutorial.jsx"
+            //bundles.Add(new BabelBundle("~/bundles/main").Include(
+            //    "~/build/client.bundle.js"
+            //));
+
+            bundles.Add(new ScriptBundle("~/bundles/main").Include(
+                "~/build/client.bundle.js"
             ));
 
             // Forces files to be combined and minified in debug mode
